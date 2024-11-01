@@ -1,0 +1,205 @@
+<div th:fragment="content">
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">INJECTION CUSTOMER LIST</h2>
+        <div class="jumbotron">
+
+            <div class="form-inline">
+                <div class="show-entry">
+                    <form class="form-inline">
+                        <label for="entriesPerPage">Show</label>
+                        <select id="entriesPerPage" onchange="handleEntriesChange()">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <label for="entriesPerPage"> entries</label>
+                    </form>
+                </div>
+                <div class="show-search">
+                    <form class="form-inline">
+                        <label for="searchQuery" class="mr-2">Search:</label>
+                        <input type="text" id="searchQuery" name="searchQuery" class="form-control"
+                               onkeydown="handleSearch(event)" placeholder="Search..."/>
+                    </form>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        <label>
+                            <input type="checkbox" id="selectAllCheckbox" onclick="toggleAllCheckboxes(this)">
+                        </label>
+                    </th>
+                    <th hidden>Customer ID</th>
+                    <th>Full Name</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Identity Card</th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tbody id="customer-table-body">
+                <!-- Rows will be dynamically inserted here by JavaScript -->
+                </tbody>
+            </table>
+
+            <div class="pagination-controls" id="pagination-controls">
+                <!-- Pagination will be dynamically inserted here by JavaScript -->
+            </div>
+
+            <div class="entries-info" id="entries-info">
+                <!-- This line will be dynamically updated by JavaScript -->
+            </div>
+
+            <div class="action-buttons">
+                <button class="new" onclick="redirectToCreatePage()">New Customer</button>
+                <button class="update" onclick="updateSelectedCustomer()">Update Customer</button>
+                <button class="delete" onclick="deleteSelectedCustomers()">Delete Customer</button>
+            </div>
+            <!-- Placeholder for messages -->
+            <div id="action-message" style="color: red; margin-top: 10px;"></div>
+
+            <!-- Customer Modal -->
+            <div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="customerModalLabel">Customer Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="customerForm-list">
+                                <div class="container">
+                                    <!-- Customer ID -->
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="customerId" class="fw-bold">Customer ID<span
+                                                        class="asterisk">(*)</span>:</label>
+                                                <input type="text" class="form-control" id="customerId" readonly>
+                                                <div id="customerId-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Full Name -->
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="fullName" class="fw-bold">Full Name<span class="asterisk">(*)</span>:</label>
+                                                <input type="text" class="form-control" id="fullName" required readonly>
+                                                <div id="fullName-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Date of Birth -->
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="dateOfBirth" class="fw-bold">Date of Birth<span
+                                                        class="asterisk">(*)</span>:</label>
+                                                <input type="date" class="form-control" id="dateOfBirth" required
+                                                       readonly>
+                                                <div id="dateOfBirth-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Gender -->
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="gender" class="fw-bold">Gender</label>
+                                                <select id="gender" name="gender" class="form-control" disabled>
+                                                    <option value="">--Select Gender--</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                    <option value="3">Other</option>
+                                                </select>
+                                                <div id="gender-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Identity Card -->
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="identityCard" class="fw-bold">Identity Card<span
+                                                        class="asterisk">(*)</span>:</label>
+                                                <input type="text" class="form-control" id="identityCard" required
+                                                       readonly>
+                                                <div id="identityCard-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Address -->
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address" class="fw-bold">Address<span
+                                                        class="asterisk">(*)</span>:</label>
+                                                <input type="text" class="form-control" id="address" required readonly>
+                                                <div id="address-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Username and Password -->
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username" class="fw-bold">Username<span
+                                                        class="asterisk">(*)</span>:</label>
+                                                <input type="email" class="form-control" id="username" required
+                                                       readonly>
+                                                <div id="username-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="password" class="fw-bold">Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="password" readonly>
+                                                </div>
+                                                <div id="password-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email and Phone -->
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="email" class="fw-bold">Email<span
+                                                        class="asterisk">(*)</span>:</label>
+                                                <input type="email" class="form-control" id="email" required readonly>
+                                                <div id="email-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="phone" class="fw-bold">Phone</label>
+                                                <input type="text" class="form-control" id="phone" readonly>
+                                                <div id="phone-error" class="text-danger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="saveCustomer(event)" hidden>Save
+                                changes
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+</div>

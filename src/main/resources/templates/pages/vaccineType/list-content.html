@@ -1,0 +1,115 @@
+<div th:fragment="content">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">VACCINE TYPE LIST</h2>
+
+    <!-- Filters and Search -->
+    <div class="jumbotron">
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-inline">
+            <label for="showEntries" class="mr-2">Show</label>
+            <select id="showEntries" class="form-control form-control-sm" onchange="loadVaccines(0, this.value)">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </select>
+            <span class="ml-2">entries</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-inline justify-content-end">
+            <label for="search" class="mr-2">Search:</label>
+            <input type="text" id="search" class="form-control" oninput="debounceSearch()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Vaccine Type Table -->
+      <table id="vaccine-table" class="table table-bordered table-hover">
+        <thead class="thead">
+        <tr>
+          <th scope="col">
+            <input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes(this)">
+          </th>
+          <th scope="col">Code</th>
+          <th scope="col">Vaccine Type Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody id="vaccine-table-body">
+        <!-- Rows will be injected here by JavaScript -->
+        </tbody>
+      </table>
+
+      <!-- Pagination and Info -->
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p id="paginationInfo">Showing 0 to 0 of 0 entries</p>
+        </div>
+        <div>
+          <nav aria-label="Page navigation example">
+            <ul id="pagination" class="pagination pagination-sm">
+              <!-- Pagination links will be injected here by JavaScript -->
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-4 action-buttons">
+        <button class="new" onclick="redirectToCreatePage()">New Vaccine Type</button>
+        <button class="update" onclick="updateStatus()">Make In-Active</button>
+        <button class="btn btn-primary" id="makeActiveBtn" onclick="updateActive()">Make Active</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Vaccine Modal -->
+  <div class="modal fade" id="vaccineModal" tabindex="-1" aria-labelledby="vaccineModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vaccineModalLabel">Vaccine Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="vaccineForm">
+            <div class="form-group">
+              <label for="vaccineId">Vaccine ID</label>
+              <input type="text" class="form-control" id="vaccineId" readonly>
+            </div>
+            <div class="form-group">
+              <label for="vaccineName">Vaccine Name</label>
+              <input type="text" class="form-control" id="vaccineName" required>
+            </div>
+            <div class="form-group">
+              <label for="vaccineType">Vaccine Type</label>
+              <input type="text" class="form-control" id="vaccineType" required>
+            </div>
+            <div class="form-group">
+              <label for="numberOfInjection">Number of Injections</label>
+              <input type="number" class="form-control" id="numberOfInjection" required>
+            </div>
+            <div class="form-group">
+              <label for="origin">Origin</label>
+              <input type="text" class="form-control" id="origin" required>
+            </div>
+            <div class="form-group">
+              <label for="status">Status</label>
+              <input type="text" class="form-control" id="status" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="saveVaccine()">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

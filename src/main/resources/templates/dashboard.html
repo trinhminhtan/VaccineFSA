@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Vaccine Management System</title>
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="row">
+        <div class="col-md-2 sidebar">
+            <div th:replace="fragments/sidebar :: sidebar"></div>
+        </div>
+        <div class="col-md-10 main-content">
+            <div class="container mt-5 pt-4">
+                <!-- Admin view: Only if the user has ROLE_ADMIN -->
+                <div sec:authorize="hasRole('ROLE_ADMIN')" th:replace="dashboard-content :: admin"></div>
+
+                <!-- Employee view: Only if the user has ROLE_EMPLOYEE but not ROLE_ADMIN -->
+                <div sec:authorize="hasRole('ROLE_EMPLOYEE') and not hasRole('ROLE_ADMIN')"
+                     th:replace="dashboard-content :: employee">
+                </div>
+
+                <!-- Customer view: Only if the user has ROLE_CUSTOMER but not ROLE_EMPLOYEE or ROLE_ADMIN -->
+                <div sec:authorize="hasRole('ROLE_CUSTOMER') and not hasRole('ROLE_EMPLOYEE') and not hasRole('ROLE_ADMIN')"
+                     th:replace="dashboard-content :: customer">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

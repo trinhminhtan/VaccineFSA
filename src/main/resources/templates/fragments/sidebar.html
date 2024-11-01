@@ -1,0 +1,138 @@
+<div th:fragment="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <img src="/photos/logo.svg" alt="Logo" class="logo-img mr-2">
+    </div>
+    <div class="user-profile text-center d-flex align-items-center">
+        <img src="https://via.placeholder.com/50" alt="User" class="img-fluid rounded-circle">
+        <div>
+            <h4 th:text="${username}">N/A</h4>
+            <p>fsoft.com.vn</p>
+        </div>
+    </div>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard" th:href="@{/#}" data-toggle="link">Home</a>
+        </li>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#employeeSubmenu" data-toggle="collapse"
+                   data-target="#employeeSubmenu" aria-expanded="false"> Employee management <i
+                        class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="employeeSubmenu">
+                    <li class="nav-item">
+                        <a href="/employee" class="nav-link" data-toggle="link">Employee List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/employee/create" class="nav-link" data-toggle="link">Create Employee</a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_EMPLOYEE')">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#customerSubmenu" data-toggle="collapse"
+                   data-target="#customerSubmenu" aria-expanded="false"> Customer management <i
+                        class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="customerSubmenu">
+                    <li class="nav-item">
+                        <a href="/customer" class="nav-link" data-toggle="link">Customer List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/customer/create" class="nav-link" data-toggle="link">Create Customer</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#vaccineTypeSubmenu" data-toggle="collapse"
+                   data-target="#vaccineTypeSubmenu" aria-expanded="false"> Vaccine Type management <i
+                        class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="vaccineTypeSubmenu">
+                    <li class="nav-item">
+                        <a href="/vaccineType" class="nav-link" data-toggle="link">Vaccine Type List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/vaccineType/create" class="nav-link" data-toggle="link">Create Vaccine Type</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#vaccineManagementSubmenu" data-toggle="collapse"
+                   data-target="#vaccineManagementSubmenu" aria-expanded="false"> Vaccine management <i
+                        class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="vaccineManagementSubmenu">
+                    <li class="nav-item">
+                        <a href="/vaccine" class="nav-link" data-toggle="link">Vaccine List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/vaccine/create" class="nav-link" data-toggle="link">Vaccine Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/vaccine/import" class="nav-link" data-toggle="link">Vaccine Import</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#injectionScheduleSubmenu" data-toggle="collapse"
+                   data-target="#injectionScheduleSubmenu" aria-expanded="false"> Injection Schedule <i
+                        class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="injectionScheduleSubmenu">
+                    <li class="nav-item">
+                        <a href="/injection-schedule" class="nav-link" data-toggle="link">Injection Schedule List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/injection-schedule/create" class="nav-link" data-toggle="link">Create Injection
+                            Schedule</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#injectionResultSubmenu" data-toggle="collapse"
+                   data-target="#injectionResultSubmenu" aria-expanded="false"> Injection Result <i
+                        class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="injectionResultSubmenu">
+                    <li class="nav-item">
+                        <a href="/injection-result" class="nav-link" data-toggle="link">Injection Result List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/injection-result/create" class="nav-link" data-toggle="link">Create Injection
+                            Result</a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_CUSTOMER')">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#newsSubmenu" data-toggle="collapse" data-target="#newsSubmenu"
+                   aria-expanded="false"> News <i class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="newsSubmenu">
+
+                    <li class="nav-item">
+                        <a href="/news" class="nav-link" data-toggle="link">News List</a>
+                    </li>
+                    <div sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                        <li class="nav-item">
+                            <a href="/news/create" class="nav-link" data-toggle="link">Create News</a>
+                        </li>
+                    </div>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#reportSubmenu" data-toggle="collapse" data-target="#reportSubmenu"
+                   aria-expanded="false"> Report <i class="fas fa-plus icon-toggle"></i></a>
+                <ul class="collapse list-unstyled" id="reportSubmenu">
+                    <li class="nav-item">
+                        <a href="/report/injection" class="nav-link" data-toggle="link">Report Injection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/report/customer" class="nav-link" data-toggle="link">Report Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/report/vaccine" class="nav-link" data-toggle="link">Report Vaccine</a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+    </ul>
+</div>

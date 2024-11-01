@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Import Vaccine - Vaccine Management System</title>
+  <style>
+    .custom-file-label {
+      cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: background-color 0.3s, color 0.3s;
+      display: inline-block;
+      margin-right: 1rem;
+    }
+
+    .custom-file-label:hover {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+
+    .custom-file-label::after {
+      content: attr(data-browse);
+      background-color: #007bff;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-left: 1px solid #ced4da;
+      transition: background-color 0.3s, color 0.3s;
+      display: inline-block;
+    }
+
+    .custom-file-label:hover::after {
+      background-color: #0056b3;
+      color: #fff;
+    }
+
+    .custom-file-input {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="page-container">
+  <div th:replace="fragments/header :: header"></div>
+  <div class="row">
+    <div class="col-md-2 sidebar">
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+    </div>
+    <div class="col-md-10 main-content">
+      <div class="container mt-5 pt-4">
+        <div th:replace="pages/vaccine/import-content :: content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script type="module" th:src="@{/js/api/vaccine/import.js}"></script>
+</body>
+</html>

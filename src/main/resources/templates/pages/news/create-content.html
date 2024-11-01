@@ -1,0 +1,55 @@
+<div th:fragment="content">
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">CREATE NEWS</h2>
+        <div class="jumbotron">
+            <form id="newsForm">
+                <div class="form-group">
+                    <label for="title"><i class="fas fa-heading"></i>Title (*):</label
+                    ><input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        name="title"
+                        placeholder="Enter news title"
+                        required
+                />
+                </div>
+                <div class="form-group">
+                    <label for="preview"><i class="fas fa-eye"></i>Preview (*):</label
+                    ><textarea
+                        class="form-control"
+                        id="preview"
+                        name="preview"
+                        rows="3"
+                        placeholder="Enter news preview"
+                        required
+                ></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="content"
+                    ><i class="fas fa-align-left"></i>Content (*):</label
+                    ><textarea
+                        class="form-control"
+                        id="content"
+                        name="content"
+                        rows="5"
+                        placeholder="Enter news content"
+                        required
+                ></textarea>
+                </div>
+                <div class="mt-4 action-buttons">
+                    <button type="submit" class="new">Save
+                    </button
+                    >
+                    <button type="reset" class="reset">Reset
+                    </button
+                    >
+                    <button class="cancel" onclick='window.location.href="/news"'>
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div id="message" class="mt-4"></div>
+    </div>
+</div>

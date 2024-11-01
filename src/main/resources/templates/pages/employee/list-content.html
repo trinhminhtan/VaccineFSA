@@ -1,0 +1,184 @@
+<div th:fragment="content">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">EMPLOYEE LIST</h2>
+    <div class="jumbotron">
+    <div class="form-inline">
+      <div class="show-entry">
+        <form class="form-inline">
+          <label for="entriesPerPage">Show</label>
+          <select id="entriesPerPage" onchange="handleEntriesChange()">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <label for="entriesPerPage"> entries</label>
+        </form>
+      </div>
+      <div class="show-search">
+        <form class="form-inline">
+          <label for="searchQuery" class="mr-2" >Search:</label>
+          <input type="text" id="searchQuery" name="searchQuery" class="form-control" onkeydown="handleSearch(event)" placeholder="Search..."/>
+        </form>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" id="selectAllCheckbox" onclick="toggleAllCheckboxes(this)">
+          </label>
+        </th>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Date of Birth</th>
+        <th>Gender</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Image</th>
+      </tr>
+      </thead>
+      <tbody id="employee-table-body">
+      <!-- Rows will be dynamically inserted here by JavaScript -->
+      </tbody>
+    </table>
+
+    <div class="pagination-controls" id="pagination-controls">
+      <!-- Pagination will be dynamically inserted here by JavaScript -->
+    </div>
+
+    <div class="entries-info" id="entries-info">
+      <!-- This line will be dynamically updated by JavaScript -->
+    </div>
+
+    <div class="action-buttons">
+      <button class="new" onclick="redirectToCreatePage()">New Employee</button>
+      <button class="update" onclick="updateSelectedEmployee()">Update Employee</button>
+      <button class="delete" onclick="deleteSelectedEmployees()">Delete Employee</button>
+    </div>
+    <!-- Placeholder for messages -->
+    <div id="action-message" style="color: red; margin-top: 10px;"></div>
+
+      <!-- Employee Modal -->
+      <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="employeeModalLabel">Employee Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="employeeForm-list">
+                <div class="container">
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="employeeId" class="fw-bold">Employee ID<span class="asterisk">(*)</span>:</label>
+                        <input type="text" class="form-control" id="employeeId" readonly>
+                        <div class="text-danger" id="errorEmployeeId"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="employeeName" class="fw-bold">Employee Name<span class="asterisk">(*)</span>:</label>
+                        <input type="text" class="form-control" id="employeeName" required readonly>
+                        <div class="text-danger" id="errorEmployeeName"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="dateOfBirth" class="fw-bold">Date of Birth<span class="asterisk">(*)</span>:</label>
+                        <input type="date" class="form-control" id="dateOfBirth" required readonly>
+                        <div class="text-danger" id="errorDateOfBirth"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="gender" class="fw-bold">Gender</label>
+                        <select id="gender" name="gender" class="form-control" disabled>
+                          <option value="">--Select Gender--</option>
+                          <option value="1">Male</option>
+                          <option value="2">Female</option>
+                          <option value="3">Other</option>
+                        </select>
+                        <div class="text-danger" id="errorGender"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="phone" class="fw-bold">Phone<span class="asterisk">(*)</span>:</label>
+                        <input type="text" class="form-control" id="phone" required readonly>
+                        <div class="text-danger" id="errorPhone"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="address" class="fw-bold">Address<span class="asterisk">(*)</span>:</label>
+                        <input type="text" class="form-control" id="address" required readonly>
+                        <div class="text-danger" id="errorAddress"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="email" class="fw-bold">Email<span class="asterisk">(*)</span>:</label>
+                        <input type="email" class="form-control" id="email" required readonly>
+                        <div class="text-danger" id="errorEmail"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="workingPlace" class="fw-bold">Working Place</label>
+                        <input type="text" class="form-control" id="workingPlace" readonly>
+                        <div class="text-danger" id="errorWorkingPlace"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="position" class="fw-bold">Position</label>
+                        <input type="text" class="form-control" id="position" readonly>
+                        <div class="text-danger" id="errorPosition"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="image" class="fw-bold">Image</label>
+                        <img id="imagePreview" alt="Employee Image" class="img-thumbnail mt-2" style="width: 150px; height: 150px;" src="#">
+                        <input type="file" class="form-control-file mt-2" id="image" onchange="updateImagePreview()" hidden>
+                        <div class="text-danger" id="errorImage"></div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="username" class="fw-bold">Username</label>
+                        <input type="text" class="form-control" id="username" readonly>
+                        <div class="text-danger" id="errorUsername"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" onclick="saveEmployee(event)" hidden>Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<div th:fragment="content">
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Vaccine List</h2>
+        <div class="jumbotron">
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-inline">
+                        <label for="showEntries" class="mr-2">Show</label>
+                        <select id="showEntries" class="form-control">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span class="ml-2">entries</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-inline justify-content-end">
+                        <label for="search" class="mr-2">Search:</label>
+                        <input type="text" id="search" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead">
+                <tr>
+                    <th>
+                        <input type="checkbox" id="selectAll">
+                    </th>
+                    <th>Vaccine id</th>
+                    <th>Vaccine name</th>
+                    <th>Vaccine type</th>
+                    <th>Number of injections</th>
+                    <th>Origin</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="vaccineTableBody">
+                <!-- Data will be loaded here dynamically -->
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p id="paginationInfo">Showing 0 to 0 of 0 entries</p>
+                </div>
+                <div class="col-md-6">
+                    <nav aria-label="Page navigation example">
+                        <ul id="pagination" class="pagination justify-content-end">
+                            <!-- Pagination links will be loaded here dynamically -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row mt-4 action-buttons">
+                <button class="new" onclick="window.location.href='/vaccine/create';">Create Vaccine
+                </button>
+                <button href="#" id="makeInactiveBtn" class="delete">Make Inactive</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="vaccineModal" tabindex="-1" role="dialog"
+         aria-labelledby="vaccineModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="vaccineModalLabel">Vaccine Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="vaccineId"  class="font-weight-bold">Vaccine ID</label>
+                            <input type="text" class="form-control" id="vaccineId" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="vaccineName" class="font-weight-bold">Vaccine Name<span class="text-danger">*</span>:</label>
+                            <input type="text" class="form-control" id="vaccineName">
+                        </div>
+                        <div class="form-group">
+                            <label for="vaccineTypeId"  class="font-weight-bold">Vaccine Type</label>
+                            <input type="text" class="form-control" id="vaccineTypeId" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="numberOfInjection" class="font-weight-bold">Number of Injection<span class="text-danger">*</span>:</label>
+                            <input type="number" class="form-control" id="numberOfInjection" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeBeginNextInjection" class="font-weight-bold">Time Begin Next Injection<span class="text-danger">*</span>:</label>
+                            <input type="date" class="form-control" id="timeBeginNextInjection">
+                        </div>
+                        <div class="form-group">
+                            <label for="timeEndNextInjection" class="font-weight-bold">Time End Next Injection<span class="text-danger">*</span>:</label>
+                            <input type="date" class="form-control" id="timeEndNextInjection">
+                        </div>
+                        <div class="form-group">
+                            <label for="origin" class="font-weight-bold">Origin<span class="text-danger">*</span>:</label>
+                            <select id="origin" class="form-control">
+                                <option value="">-- Select place of Origin --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contraindication"  class="font-weight-bold">Contraindication</label>
+                            <input type="text" class="form-control" id="contraindication">
+                        </div>
+                        <div class="form-group">
+                            <label for="indication"  class="font-weight-bold">Indication</label>
+                            <input type="text" class="form-control" id="indication">
+                        </div>
+                        <div class="form-group">
+                            <label for="usage"  class="font-weight-bold">Vaccine Type Name</label>
+                            <input type="text" class="form-control" id="vaccineTypeName" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="usage"  class="font-weight-bold">Usage</label>
+                            <input type="text" class="form-control" id="usage">
+                        </div>
+                        <div class="form-group">
+                            <label for="status"  class="font-weight-bold">Status</label>
+                            <select class="form-control" id="status">
+                                <option value="INACTIVE">INACTIVE</option>
+                                <option value="ACTIVE">ACTIVE</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveBtn">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

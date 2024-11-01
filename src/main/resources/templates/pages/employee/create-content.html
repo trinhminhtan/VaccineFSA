@@ -1,0 +1,138 @@
+<div th:fragment="content">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">CREATE EMPLOYEE</h2>
+    <div class="jumbotron">
+
+      <form id="employeeForm">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="employeeId" class="fw-bold">Employee ID <span class="asterisk">(*)</span>:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-id-badge"></i></span>
+                </div>
+                <input type="text" class="form-control" id="employeeId" name="employeeId" placeholder="VMExxxxxxx" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="employeeName" class="fw-bold">Employee Name <span class="asterisk">(*)</span>:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control" id="employeeName" name="employeeName" placeholder="Enter employee name">
+              </div>
+              <div class="error-message text-danger" id="name-error"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="fw-bold">Gender:</label>
+              <div class="input-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                  <label class="form-check-label" for="male"><i class="fas fa-mars"></i> Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                  <label class="form-check-label" for="female"><i class="fas fa-venus"></i> Female</label>
+                </div>
+              </div>
+              <div class="error-message text-danger" id="gender-error"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="dateOfBirth" class="fw-bold">Date of Birth <span class="asterisk">(*)</span>:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+              </div>
+              <div class="error-message text-danger" id="dob-error"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="phone" class="fw-bold">Phone <span class="asterisk">(*)</span>:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                </div>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+              </div>
+              <div class="error-message text-danger" id="phone-error"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="address" class="fw-bold">Address <span class="asterisk">(*)</span>:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                </div>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+              </div>
+              <div class="error-message text-danger" id="address-error"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="email" class="fw-bold">Email <span class="asterisk">(*)</span>:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                </div>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+              </div>
+              <div class="error-message text-danger" id="email-error"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="workingPlace" class="fw-bold">Working Place:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-university"></i></span>
+                </div>
+                <input type="text" class="form-control" id="workingPlace" name="workingPlace" placeholder="Enter working place">
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="position" class="fw-bold">Position:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                </div>
+                <input type="text" class="form-control" id="position" name="position" placeholder="Enter position">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="image" class="fw-bold">Image:</label>
+          <div class="input-group">
+            <input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+            <div id="error-message" class="text-danger mt-2"></div>
+            <img id="image-preview" class="img-thumbnail mt-2" style="width: 200px; height: 200px; display:none;">
+          </div>
+        </div>
+        <div class="mt-4 action-buttons">
+          <button type="submit" class="new">Save</button>
+          <button type="reset" class="reset" onclick="clearErrorMessages()">Reset</button>
+          <button type="button" class="cancel" onclick="redirectToCreatePage()">Cancel</button>
+        </div>
+      </form>
+      <div id="responseMessage"></div>
+    </div>
+  </div>

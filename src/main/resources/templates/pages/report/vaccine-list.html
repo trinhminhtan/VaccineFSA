@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Report Vaccine</title>
+  <style>
+    .fw-bold {
+      font-weight: bolder;
+    }
+
+  </style>
+</head>
+<body>
+<div class="page-container">
+  <div th:replace="fragments/header :: header"></div>
+  <div class="row">
+    <div class="col-md-2 sidebar">
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+    </div>
+    <div class="col-md-10 main-content">
+      <div class="container mt-5 pt-4">
+        <div th:replace="pages/report/vaccine-list-content :: content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div type="module" th:replace="fragments/footer :: footer"></div>
+<script th:src="@{/js/api/reports/vaccine-list.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

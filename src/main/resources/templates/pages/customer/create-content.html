@@ -1,0 +1,172 @@
+<div th:fragment="content">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">REGISTER CUSTOMER INFORMATION</h2>
+
+    <form id="customer-form">
+      <!-- Personal Information -->
+      <div class="card mb-3">
+        <div class="card-header font-weight-bold">
+          Personal Information
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="fullName" class="font-weight-bold">Full name<span class="asterisk">(*)</span>:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter full name">
+                </div>
+                <div class="error-message text-danger" id="fullName-error"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="dateOfBirth" class="font-weight-bold">Date of birth<span class="asterisk">(*)</span>:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                  </div>
+                  <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                </div>
+                <div class="error-message text-danger" id="dob-error"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="font-weight-bold">Gender:</label>
+                <div class="input-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                    <label class="form-check-label" for="male"><i class="fas fa-mars"></i> Male</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                    <label class="form-check-label" for="female"><i class="fas fa-venus"></i> Female</label>
+                  </div>
+                </div>
+                <div class="error-message text-danger" id="gender-error"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="identityCard" class="font-weight-bold">Identity card<span class="asterisk">(*)</span>:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="identityCard" name="identityCard" placeholder="Enter identity card">
+                </div>
+                <div class="error-message text-danger" id="identityCard-error"></div>
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="address" class="font-weight-bold">Address:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Information -->
+      <div class="card mb-3">
+        <div class="card-header font-weight-bold">
+          Account Information
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="username" class="font-weight-bold">Username<span class="asterisk">(*)</span>:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                </div>
+                <div class="error-message text-danger" id="username-error"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="password" class="font-weight-bold">Password<span class="asterisk">(*)</span>:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
+                  </div>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                </div>
+                <div class="error-message text-danger" id="password-error"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="passwordConfirm" class="font-weight-bold">Password Confirm<span class="asterisk">(*)</span>:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
+                  </div>
+                  <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm password">
+                </div>
+                <div class="error-message text-danger" id="passwordConfirm-error"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="email" class="font-weight-bold">Email<span class="asterisk">(*)</span>:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                  </div>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                </div>
+                <div class="error-message text-danger" id="email-error"></div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="phone" class="font-weight-bold">Phone:</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4 mb-4 ml-2">
+          <div class="mt-4 action-buttons">
+            <button type="submit" class="new">Save</button>
+            <button type="reset" class="reset">Reset</button>
+            <button type="button" class="cancel" onclick="redirectToCreatePage()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

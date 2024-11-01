@@ -1,0 +1,173 @@
+<div th:fragment="content">
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">INJECTION CUSTOMER LIST</h2>
+        <div class="jumbotron">
+
+        <div class="form-inline">
+            <div class="show-entry">
+                <form class="form-inline">
+                    <label for="entriesPerPage">Show</label>
+                    <select id="entriesPerPage" onchange="handleEntriesChange()">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <label for="entriesPerPage"> entries</label>
+                </form>
+            </div>
+            <div class="show-search">
+                <form class="form-inline">
+                    <label for="searchQuery" class="mr-2" >Search:</label>
+                    <input type="text" id="searchQuery" name="searchQuery" class="form-control" onkeydown="handleSearch(event)" placeholder="Search Name Or ID"/>
+                </form>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    <label>
+                        <input type="checkbox" id="selectAllCheckbox" onclick="toggleAllCheckboxes(this)">
+                    </label>
+                </th>
+                <th hidden>Injection Result ID</th>
+                <th>Customer Info</th>
+                <th>Vaccine Name</th>
+                <th>Vaccine Type Name</th>
+                <th>Number of Injection</th>
+                <th>Date of Injection</th>
+                <th>Next Injection Date</th>
+            </tr>
+            </thead>
+            <tbody id="injection-table-body">
+            <!-- Rows will be dynamically inserted here by JavaScript -->
+            </tbody>
+        </table>
+
+        <div class="pagination-controls" id="pagination-controls">
+            <!-- Pagination will be dynamically inserted here by JavaScript -->
+        </div>
+
+        <div class="entries-info" id="entries-info">
+            <!-- This line will be dynamically updated by JavaScript -->
+        </div>
+
+        <div class="action-buttons">
+            <button class="new" onclick="redirectToCreatePage()">Create Injection Result</button>
+            <button class="update" onclick="updateSelectedInjectionResult()">Update Injection Result</button>
+            <button class="delete" onclick="deleteSelectedCustomers()">Delete Injection Result</button>
+        </div>
+
+        <!-- Placeholder for messages -->
+        <div id="action-message" style="color: red; margin-top: 10px;"></div>
+
+        <!-- Employee Modal -->
+        <div class="modal fade" id="injectionModal" tabindex="-1" aria-labelledby="injectionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="injectionModalLabel">Injection Result Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modalFormContainer">
+                        <form id="injectionForm-list">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="injectionResultId" class="font-weight-bold">Injection Result ID<span class="text-danger">*</span>:</label>
+                                            <input type="text" class="form-control" id="injectionResultId"  readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="vaccineTypeDropdown" class="font-weight-bold">Vaccine Type Name<span class="text-danger">*</span>:</label>
+                                            <select id="vaccineTypeDropdown" class="form-control"  disabled>
+                                                <option value="" >-- Select Vaccine Type Name --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="vaccineNameDropdown" class="font-weight-bold">Vaccine Name<span class="text-danger">*</span>:</label>
+                                            <select id="vaccineNameDropdown" class="form-control"  disabled>
+                                                <option value="" >-- Select Vaccine Type Name --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="numberOfInjection" class="font-weight-bold">Number Of Injection</label>
+                                            <input type="text" class="form-control" id="numberOfInjection" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="injectionDate" class="font-weight-bold">Date of Injection<span class="asterisk">(*)</span>:</label>
+                                            <input type="date" class="form-control" id="injectionDate" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="nextDate" class="font-weight-bold">Next Injection Date<span class="asterisk">(*)</span>:</label>
+                                            <input type="date" class="form-control" id="nextDate" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="customerId" class="font-weight-bold">Customer ID:</label>
+                                            <input type="text" class="form-control" id="customerId" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="customerName" class="font-weight-bold">Customer Full Name:</label>
+                                            <input type="text" class="form-control" id="customerName" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="customerDOB" class="font-weight-bold">Date of Birth:</label>
+                                            <input type="text" class="form-control" id="customerDOB" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Place of Injection -->
+                                    <div class="form-group col-md-4">
+                                        <label for="placeOfInjection" class="font-weight-bold">Place of injection<span class="text-danger">*</span>:</label>
+                                        <select id="placeOfInjection" class="form-control" disabled>
+                                            <option value="">-- Select place of injection --</option>
+                                        </select>
+                                        <div id="errorPlaceOfInjection" class="text-danger"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" onclick="saveInjectionResult(event)" hidden>Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

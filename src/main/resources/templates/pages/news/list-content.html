@@ -1,0 +1,152 @@
+<div th:fragment="content">
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">NEWS LIST</h2>
+        <div class="jumbotron">
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="form-inline">
+                        <label for="entries" class="mr-2">Show</label
+                        ><select
+                            id="entries"
+                            class="form-control form-control-sm"
+                            onchange="loadNews(0,this.value)"
+                    >
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select
+                    ><label class="ml-2">entries</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-inline justify-content-end">
+                        <label for="handleSearch" class="mr-2">Search:</label
+                        ><input
+                            type="text"
+                            id="handleSearch"
+                            class="form-control form-control-sm"
+                            placeholder="Search"
+                            onkeydown="handleSearch(event)"
+                    />
+                    </div>
+                </div>
+            </div>
+            <table id="news-table" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        <input
+                                type="checkbox"
+                                id="selectAllCheckbox"
+                                onclick="toggleAllCheckboxes(this)"
+                        />
+                    </th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Post Date</th>
+                </tr>
+                </thead>
+                <tbody id="news-table-body"></tbody>
+            </table>
+            <div class="d-flex justify-content-between align-items-center">
+                <div><p id="entries-info">Showing 0 to 0 of 0 entries</p></div>
+                <div>
+                    <nav aria-label="Page navigation example">
+                        <ul id="pagination" class="pagination pagination-sm"></ul>
+                    </nav>
+                </div>
+            </div>
+            <div sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                <div class="mt-4 action-buttons">
+                    <button class="new" onclick="redirectToCreateNews()">Create News
+                    </button
+                    >
+                    <button class="update" onclick="updateSelectedNews()">
+                        Update News
+                    </button
+                    >
+                    <button class="delete" onclick="deleteSelectedNews()">
+                        Delete News
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+            class="modal fade"
+            id="newsModal"
+            tabindex="-1"
+            aria-labelledby="newsModalLabel"
+            aria-hidden="true"
+    >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsModalLabel">News Details</h5>
+                    <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="newsForm">
+                        <div class="form-group">
+                            <label for="newsId">News ID</label
+                            ><input
+                                type="text"
+                                class="form-control"
+                                id="newsId"
+                                readonly="readonly"
+                        />
+                        </div>
+                        <div class="form-group">
+                            <label for="newsTitle">Title</label
+                            ><input
+                                type="text"
+                                class="form-control"
+                                id="newsTitle"
+                                required
+                        />
+                        </div>
+                        <div class="form-group">
+                            <label for="newsContent">Content</label
+                            ><textarea
+                                class="form-control"
+                                id="newsContent"
+                                rows="4"
+                                required
+                        ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="postDate">Post Date</label
+                            ><input type="date" class="form-control" id="postDate" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="newsPreview">Preview</label
+                            ><textarea
+                                class="form-control"
+                                id="newsPreview"
+                                rows="2"
+                        ></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                        <button type="button" class="btn btn-primary" onclick="saveNews()">
+                            Save changes
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

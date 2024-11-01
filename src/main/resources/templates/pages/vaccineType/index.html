@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Vaccine Type List - Vaccine Management System</title>
+  <style>.form-inline {
+    justify-content: unset !important;
+  }
+  </style>
+</head>
+<body>
+<div class="page-container">
+  <div th:replace="fragments/header :: header"></div>
+  <div class="row">
+    <div class="col-md-2 sidebar">
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+    </div>
+    <div class="col-md-10 main-content">
+      <div class="container mt-5 pt-4">
+        <div th:replace="pages/vaccineType/list-content :: content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script type="module" th:src="@{/js/api/vaccineType/full.js}"></script>
+</body>
+</html>

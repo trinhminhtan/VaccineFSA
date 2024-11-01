@@ -1,0 +1,78 @@
+<div th:fragment="content">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">CREATE INJECTION RESULT</h2>
+    <div class="jumbotron">
+      <form id="injection-result-form">
+        <div class="form-row">
+          <!-- Customer -->
+          <div class="form-group col-md-4">
+            <label for="customerDropdown" class="font-weight-bold">Customer<span class="text-danger">*</span>:</label>
+            <select id="customerDropdown" class="form-control">
+              <option value="">-- Select Customer --</option>
+            </select>
+            <div id="errorCustomerDropdown" class="text-danger"></div>
+          </div>
+
+          <!-- Vaccine Type Name -->
+          <div class="form-group col-md-4">
+            <label for="vaccineTypeDropdown" class="font-weight-bold">Vaccine Type Name<span class="text-danger">*</span>:</label>
+            <select id="vaccineTypeDropdown" class="form-control">
+              <option value="">-- Select Vaccine Type Name --</option>
+            </select>
+            <div id="errorVaccineTypeDropdown" class="text-danger"></div>
+          </div>
+
+          <!-- Vaccine Name -->
+          <div class="form-group col-md-4">
+            <label for="vaccineName" class="font-weight-bold">Vaccine Name<span class="text-danger">*</span>:</label>
+            <select id="vaccineName" class="form-control">
+              <option value="">-- Select Vaccine Name --</option>
+            </select>
+            <div id="errorVaccineName" class="text-danger"></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <!-- Injection -->
+          <div class="form-group col-md-4">
+            <label for="injection" class="font-weight-bold">Injection<span class="text-danger">*</span>:</label>
+            <input type="number" class="form-control" id="injection" min="1" placeholder="Number of Injections">
+            <div id="errorInjection" class="text-danger"></div>
+          </div>
+
+          <!-- Date of Injection -->
+          <div class="form-group col-md-4">
+            <label for="dateOfInjection" class="font-weight-bold">Date of injection<span class="text-danger">*</span>:</label>
+            <input type="date" class="form-control" id="dateOfInjection">
+            <div id="errorDateOfInjection" class="text-danger"></div>
+          </div>
+
+          <!-- Next Injection Appointment -->
+          <div class="form-group col-md-4">
+            <label for="nextInjectionAppointment" class="font-weight-bold">Next injection appointment<span class="text-danger">*</span>:</label>
+            <input type="date" class="form-control" id="nextInjectionAppointment">
+            <div id="errorNextInjectionAppointment" class="text-danger"></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <!-- Place of Injection -->
+          <div class="form-group col-md-4">
+            <label for="placeOfInjection" class="font-weight-bold">Place of injection<span class="text-danger">*</span>:</label>
+            <select id="placeOfInjection" class="form-control">
+              <option value="">-- Select place of injection --</option>
+            </select>
+            <div id="errorPlaceOfInjection" class="text-danger"></div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="reset" class="btn btn-info">Reset</button>
+          <button type="button" class="btn btn-warning" onclick="redirectToCreatePage()">Cancel</button>
+        </div>
+      </form>
+      <div id="responseMessage" class="text-danger text-center"></div>
+    </div>
+  </div>
+</div>

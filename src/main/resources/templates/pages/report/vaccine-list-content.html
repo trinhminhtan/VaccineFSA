@@ -1,0 +1,99 @@
+<div th:fragment="content">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">REPORT VACCINE</h2>
+
+    <!-- Display Section -->
+    <div class="row mb-3 justify-content-start p-3 mb-2 bg-white text-dark shadow bg-body-tertiary rounded">
+      <!-- Display controls (Display Type, Date Range, Vaccine Types, etc.) -->
+      <div class="col">
+        <label class="fw-bold">Display Type:</label>
+        <div>
+          <input type="radio" name="displayType" id="report" checked> Report
+          <input type="radio" name="displayType" id="chart"> Chart
+        </div>
+      </div>
+
+      <!-- Chart Navigation -->
+      <div class="col" id="char-nav" style="display:none;">
+        <label for="selectYear" class="fw-bold">Select year:</label>
+        <select id="selectYear" class="form-control">
+          <option>--Select an Option--</option>
+          <!-- More years if available -->
+        </select>
+      </div>
+
+      <!-- Report Navigation -->
+      <div class="col" id="report-nav-1">
+        <div class="date-range">
+          <label class="fw-bold">Next Injection Date:</label>
+        </div>
+        <div class="date-range d-flex align-items-center">
+          <label for="fromDate" class="fw-bold">Begin:</label>
+          <input type="date" id="fromDate" name="fromDate" class="form-control">
+          <label for="toDate" class="fw-bold">End:</label>
+          <input type="date" id="toDate" name="toDate" class="form-control">
+        </div>
+      </div>
+
+      <div class="col" id="report-nav-2">
+        <label for="vaccineType" class="fw-bold">Type Name</label>
+        <select id="vaccineType" class="form-control">
+          <option value="">-- Select Option --</option>
+        </select>
+      </div>
+
+      <div class="col" id="report-nav-3">
+        <label for="origin" class="fw-bold">Origin</label>
+        <input type="text" class="form-control" id="origin">
+      </div>
+
+      <div class="col" id="report-nav-4">
+        <label class="fw-bold">Action:</label>
+        <div>
+          <button class="btn btn-secondary" id="resetButton">Reset</button>
+          <button class="btn btn-primary" id="filterButton">Filter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report Table -->
+    <div id="table-report" class="row p-3 mb-2 bg-white text-dark shadow bg-body-tertiary rounded">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>Vaccine Name</th>
+          <th>Vaccine Type</th>
+          <th>Num Of Inject</th>
+          <th>Begin Next Inject Date</th>
+          <th>End Next Inject Date</th>
+          <th>Origin</th>
+        </tr>
+        </thead>
+
+        <tbody id="injection-table-body">
+        <!-- Table data should be dynamically loaded here -->
+        </tbody>
+
+      </table>
+
+      <div class="pagination-controls" id="pagination-controls">
+        <!-- Pagination will be dynamically inserted here by JavaScript -->
+      </div>
+
+      <div class="entries-info" id="entries-info">
+        <!-- This line will be dynamically updated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div id="chartSection" class="row shadow bg-body-tertiary rounded">
+      <div class="p-3 mb-2 bg-white text-dark">
+        <h4>REPORT INJECTION CHART</h4>
+        <canvas id="injectionChart"></canvas>
+        <!-- Message to show when no data is found -->
+        <p id="noDataMessage" style="display: none; color: red;">No data found for the selected year.</p>
+      </div>
+    </div>
+  </div>
+</div>
